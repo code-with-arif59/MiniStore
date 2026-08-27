@@ -18,7 +18,7 @@ export default function EditProduct() {
  const allowedFields = ['title','description', 'price','category','image','stock']
 
 async function loadproduct() {
-    const response = await api.get("/product")
+    const response = await api.get("/api/product")
 
     const product = response.data.products.find((p)=> p._id === id);
     console.log(product,"product");

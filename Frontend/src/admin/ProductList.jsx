@@ -8,7 +8,7 @@ export default function ProductList() {
 
   async function loadproduct() {
     try {
-      const response = await api.get("/product");
+      const response = await api.get("/api/product");
       setproduct(response.data.products || []);
     } catch (error) {
       console.log("Error loading products:", error);

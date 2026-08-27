@@ -24,7 +24,7 @@ async function handleSubmit(e) {
   e.preventDefault();
 
   try {
-    const response = await api.post("/product/add", form);
+    const response = await api.post("/api/product/add", form);
 
     toast.success("Product Added Successfully!")
     navigate("/admin/product");
