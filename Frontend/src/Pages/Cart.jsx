@@ -12,7 +12,7 @@ export default function Cart() {
     if (!userId) return;
 
     try {
-      const response = await api.get(`/cart/${userId}`);
+      const response = await api.get(`/api/cart/${userId}`);
       setCart(response.data);
     } catch (error) {
       console.log("Cart load error:", error);
@@ -22,7 +22,6 @@ export default function Cart() {
   useEffect(() => {
     loadCart();
   }, []);
-  // Remove item
   async function removeItem(productId) {
     await api.post("/api/cart/remove", {
       userId,
@@ -33,7 +32,6 @@ export default function Cart() {
     window.dispatchEvent(new Event("cartupdated"));
   }
 
-  // Update quantity
   async function updateQTY(productId, quantity, maxStock) {
     if (quantity === 0) {
       await removeItem(productId);
