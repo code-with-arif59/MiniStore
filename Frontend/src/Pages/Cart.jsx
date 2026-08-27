@@ -12,7 +12,7 @@ export default function Cart() {
     if (!userId) return;
 
     try {
-      const response = await api.get(`/api/cart/${userId}`);
+      const response = await api.get(`/cart/${userId}`);
       setCart(response.data);
     } catch (error) {
       console.log("Cart load error:", error);
