@@ -26,7 +26,7 @@ export default function Login() {
     setmsg("");
     setLoading(true);
     try {
-      const response = await api.post("/auth/login", form);
+      const response = await api.post("/api/auth/login", form);
 
       console.log("Login Response Data:", response.data);
 

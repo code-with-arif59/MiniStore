@@ -23,7 +23,7 @@ export default function Signup() {
     setmsg("Signup Successfully");
 
     try {
-      const response = await api.post("/auth/signup", form);
+      const response = await api.post("/api/auth/signup", form);
       setmsg(response.data.message);
       navigate("/login");
     } catch (error) {
