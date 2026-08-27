@@ -22,7 +22,7 @@ export default function Cart() {
   useEffect(() => {
     loadCart();
   }, []);
-
+/cart/add
   // Remove item
   async function removeItem(productId) {
     await api.post("/api/cart/remove", {

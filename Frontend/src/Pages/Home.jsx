@@ -53,7 +53,7 @@ export default function Home() {
 
     try {
       await api.post(
-        "/cart/add",
+        "/api/cart/add",
         { userId, productId, quantity: 1 },
         { headers: { Authorization: `Bearer ${token}` } }
       );
