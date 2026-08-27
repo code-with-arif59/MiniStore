@@ -17,7 +17,7 @@ export default function Home() {
   async function loadProduct() {
     try {
       const response = await api.get(
-        `/product?search=${search}&category=${category}&page=${page}&limit=20`
+        `/api/product?search=${search}&category=${category}&page=${page}&limit=20`
       );
 
       const products = response.data.products || [];

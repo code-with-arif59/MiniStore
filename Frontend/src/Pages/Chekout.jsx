@@ -41,7 +41,7 @@ export default function Checkout() {
 
     try {
       await api.post(
-        "/cart/add",
+        "/api/cart/add",
         { userId, productId, quantity: newQty - getQty(productId) },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -27,7 +27,7 @@ export default function CheckoutAddress() {
 
     async function loadAddress() {
       try {
-        const response = await api.get(`/address/${userId}`);
+        const response = await api.get(`/api/address/${userId}`);
         if (response.data && response.data.length > 0) {
           setAddress(response.data[0]);
         }

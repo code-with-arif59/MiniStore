@@ -8,7 +8,7 @@ export default function ProductDetails() {
 async function loadproduct() {
   try {
     // 👉 yahan
-    const response = await api.get("/product");
+    const response = await api.get("/api/product");
 
     // 👉 API ke turant neeche
     const productt = response.data.products.find(

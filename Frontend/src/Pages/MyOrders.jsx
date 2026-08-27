@@ -19,7 +19,7 @@ export default function MyOrders() {
 
     async function fetchOrders() {
       try {
-        const response = await api.get(`/order/user/${userId}`, {
+        const response = await api.get(`/api/order/user/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setOrders(response.data || []);
