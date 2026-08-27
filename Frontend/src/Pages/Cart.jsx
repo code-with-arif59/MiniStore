@@ -25,7 +25,7 @@ export default function Cart() {
 
   // Remove item
   async function removeItem(productId) {
-    await api.post("/cart/remove", {
+    await api.post("/api/cart/remove", {
       userId,
       productId,
     });
