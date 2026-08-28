@@ -20,7 +20,7 @@ export default function Checkout() {
 
     // Fetch Cart
     api
-      .get(`/cart/${userId}`)
+      .get(`/api/cart/${userId}`)
       .then((res) => {
         setCart(res.data);
       })
@@ -28,7 +28,7 @@ export default function Checkout() {
 
     // Fetch Address
     api
-      .get(`/address/${userId}`)
+      .get(`/api/address/${userId}`)
       .then((res) => {
         setAddress(res.data[0] || null);
       })
@@ -99,7 +99,7 @@ export default function Checkout() {
       setErrorMsg("");
       setIsPlacingOrder(true);
 
-      const res = await api.post("/order/place", {
+      const res = await api.post("/api/order/place", {
         userId,
         addressLine: address,
       });

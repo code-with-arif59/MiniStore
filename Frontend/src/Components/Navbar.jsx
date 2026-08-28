@@ -24,7 +24,7 @@ export default function Navbar() {
       }
 
       try {
-        const response = await api.get(`/cart/${userId}`);
+        const response = await api.get(`/api/cart/${userId}`);
         const items = response.data?.items || [];
 
         const total = items.reduce(

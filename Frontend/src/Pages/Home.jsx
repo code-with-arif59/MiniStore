@@ -46,7 +46,7 @@ export default function Home() {
     const token = localStorage.getItem("token");
 
     if (!userId) {
-      toast.error("Pehle Login karein!");
+      toast.error("Pehle Login First!");
       navigate("/login");
       return;
     }
@@ -58,7 +58,7 @@ export default function Home() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      toast.success("Product Cart me add ho gaya! 🛒");
+      toast.success("product add 🛒");
       window.dispatchEvent(new Event("cartupdated"));
     } catch (error) {
       const errorMsg =
