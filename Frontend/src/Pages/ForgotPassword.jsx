@@ -26,7 +26,7 @@ export default function ForgotPassword() {
     try {
       setLoading(true);
 
-      const response = await api.post("/api/auth/forgot-password",{email});
+      const response = await api.post("/api/auth/forgot-password",{email:email});
 
       toast.success(response.data.message);
       setOtpSent(true);
