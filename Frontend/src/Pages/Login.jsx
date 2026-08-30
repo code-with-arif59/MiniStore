@@ -14,14 +14,12 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  //! handleChange
   function handleChnage(e) {
     const { name, value } = e.target;
     setform({ ...form, [name]: value });
   }
 
-  //! handleSubmit
-  async function handleSubmit(e) {                                                                    
+  async function handleSubmit(e) {
     e.preventDefault();
     setmsg("");
     setLoading(true);
@@ -40,13 +38,12 @@ export default function Login() {
         throw new Error("Invalid User Data received from server");
       }
 
-      //! Save in LocalStorage safely
       if (token) localStorage.setItem("token", token);
       localStorage.setItem("userId", userId);
       localStorage.setItem("role", role);
 
       setmsg("Login successful");
-     toast.success("Login Successfully! ✅");
+      toast.success("Login Successfully! ✅");
       setTimeout(() => {
         if (role === "admin") {
           navigate("/admin/product");
@@ -100,12 +97,13 @@ export default function Login() {
               onChange={handleChnage}
             />
           </div>
-                                                                            
+
           <div>
             <input
               className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
               type="password"
               name="password"
+              autoComplete="current-password"
               required
               placeholder="Enter your password"
               value={form.password}
@@ -117,18 +115,26 @@ export default function Login() {
             type="submit"
             disabled={loading}
             className={`w-full text-white py-3 rounded-lg font-semibold transition ${
-              loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
             {loading ? "Logging in..." : "Login"}
           </button>
 
-             <p className="text-center mt-3">
-              If You Have Not Account ! Please  {" "}
-              <Link to="/signup" className="text-blue-500 hover:underline">
-                Signup
-              </Link>
-            </p>
+          <p className="text-center mt-3">
+            If You Have Not Account ! Please{" "}
+            <Link to="/signup" className="text-blue-500 hover:underline">
+              Signup
+            </Link>
+            <Link
+              to="/forgot-password"
+              className="block text-center text-blue-500 hover:underline"
+            >
+              Forgot Password?
+            </Link>
+          </p>
         </form>
       </div>
     </div>

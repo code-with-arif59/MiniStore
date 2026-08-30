@@ -7,7 +7,6 @@ export default function Cart() {
   const [cart, setCart] = useState(null);
   const navigate = useNavigate();
 
-  // Load cart
   async function loadCart() {
     if (!userId) return;
 

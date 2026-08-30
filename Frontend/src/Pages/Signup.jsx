@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import api from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function Signup() {
   const [form, setForm] = useState({
@@ -20,7 +21,7 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setmsg("Signup Successfully");
+    toast.success("Signup Successfully")
 
     try {
       const response = await api.post("/api/auth/signup", form);
@@ -68,6 +69,7 @@ export default function Signup() {
               className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
               type="password"
               name="password"
+              autoComplete="new-password"
               placeholder="Enter your password"
               value={form.password}
               onChange={handleChnage}

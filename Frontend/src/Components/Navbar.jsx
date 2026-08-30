@@ -10,13 +10,11 @@ export default function Navbar() {
   const userId = localStorage.getItem("userId");
   const role = localStorage.getItem("role");
 
-  // Login / Signup page check
   const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
 
   useEffect(() => {
     async function loadCart() {
 
-      // Login/signup page par cart load mat karo
 
       if (!userId || isAuthPage || role === "admin") {
         setcartCount(0);

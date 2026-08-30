@@ -37,7 +37,7 @@ loadproduct();
 
     async function handleSubmit(e) {
     e.preventDefault();
-    await api.put(`/product/update/${id}`,form)
+    await api.put(`/api/product/update/${id}`,form)
     toast.success("update product✅")
     navigate("/admin/product")
 

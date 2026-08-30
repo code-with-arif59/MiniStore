@@ -13,8 +13,9 @@ import Cart from "./Pages/Cart";
 import ChekoutAddress from "./Pages/ChekoutAddress";
 import Chekout from "./Pages/Chekout";
 import OderSuccess from "./Pages/OderSuccess";
-import MyOrders from "./Pages/MyOrders"; // 1. MyOrders Component Import
+import MyOrders from "./Pages/MyOrders"; 
 import ProtectedRoute from "./Pages/ProtectedRoute";
+import ForgotPassword from "./Pages/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,6 @@ const router = createBrowserRouter([
         path: "/product/:id",
         element: <Product />,
       },
-      // Admin Protected Routes
       {
         path: "/admin/product",
         element: (
@@ -66,7 +66,6 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      // User Checkout Routes
       {
         path: "/cart",
         element: <Cart />,
@@ -76,7 +75,7 @@ const router = createBrowserRouter([
         element: <Chekout />,
       },
       {
-        path: "/checkout", // Extra safety route for spelling match
+        path: "/checkout", 
         element: <Chekout />,
       },
       {
@@ -87,11 +86,18 @@ const router = createBrowserRouter([
         path: "/order-success/:id",
         element: <OderSuccess />,
       },
-      // 2. My Orders Route Added
+    
       {
         path: "/my-orders",
         element: <MyOrders />,
       },
+
+        {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+
+      
     ],
   },
 ]);
