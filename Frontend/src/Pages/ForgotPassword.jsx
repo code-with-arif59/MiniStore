@@ -49,7 +49,7 @@ export default function ForgotPassword() {
     }
 
     if (newPassword !== confirmPassword) {
-      toast.error("Passwords match nahi kar rahe");
+      toast.error("mismatch password");
       return;
     }
 
