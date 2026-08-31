@@ -1,7 +1,6 @@
 import User from "../model/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import nodemailer from "nodemailer";
 import { Resend } from "resend";
 
 //! Signup User
@@ -95,10 +94,7 @@ res.status(200).json({
   }
 }
 
-import User from "../model/user.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { Resend } from "resend";
+
 
 
 //! Signup User
