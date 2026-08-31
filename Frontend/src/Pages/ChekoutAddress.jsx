@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
+import toast from "react-hot-toast";
 
 export default function CheckoutAddress() {
   const userId = localStorage.getItem("userId");
@@ -62,24 +63,26 @@ export default function CheckoutAddress() {
 
     try {
       if (editMode) {
-        await api.put(`/address/${address._id}`, {
+        await api.put(`/api/address/${address._id}`, {
           ...form,
           userId,
         });
         alert("Address updated successfully!");
       } else {
-        await api.post("/address/add", {
+        await api.post("/api/address/add", {
           ...form,
           userId,
         });
-        alert("Address saved successfully!");
+        toast.success("Save Adddress Successfully")
       }
 
       // Fixed typo: /chekout -> /checkout
       navigate("/checkout");
-    } catch (error) {
+    }
+    
+    catch (error) {
       console.log("Address error:", error);
-      alert(error.response?.data?.message || "Address save/update failed");
+      alert(error.response?.data?.message || "Address save/update failed❌");
     } finally {
       setLoading(false);
     }
