@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import api from "../../api/axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [form, setform] = useState({
@@ -48,8 +49,7 @@ export default function Login() {
 
       const role = userData?.role || "user";
 
-      const token =
-        response.data?.token || response.data?.jwt;
+      const token = response.data?.token || response.data?.jwt;
 
       if (!userId) {
         throw new Error("Invalid User Data received from server");
@@ -80,7 +80,7 @@ export default function Login() {
       const errorMessage =
         error.response?.data?.message ||
         error.message ||
-        "Login failed!";
+        "Login failed! Check backend API route or connection.";
 
       setmsg(errorMessage);
 
@@ -90,58 +90,83 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+      <div className="bg-white p-6 rounded-xl shadow-lg w-[90%] max-w-sm">
 
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleChnage}
-          placeholder="Enter Email"
-        />
-
-        <input
-          type="password"
-          name="password"
-          value={form.password}
-          onChange={handleChnage}
-          placeholder="Enter Password"
-        />
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          Login to your account
+        </h2>
 
         {msg && (
           <div
-            className={
+            className={`p-3 rounded-lg mb-4 text-center text-sm font-semibold ${
               msg === "Login successful"
                 ? "bg-green-100 text-green-700 border border-green-200"
                 : "bg-red-100 text-red-700 border border-red-200"
-            }
+            }`}
           >
             {msg}
           </div>
         )}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className={
-            loading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
-          }
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-        <Link to="/forgot-password">
-          Forgot Password?
-        </Link>
+          <div>
+            <input
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+              type="email"
+              name="email"
+              required
+              placeholder="Enter your email"
+              value={form.email}
+              onChange={handleChnage}
+            />
+          </div>
 
-        <Link to="/signup">
-          Create Account
-        </Link>
+          <div>
+            <input
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+              type="password"
+              name="password"
+              autoComplete="current-password"
+              required
+              placeholder="Enter your password"
+              value={form.password}
+              onChange={handleChnage}
+            />
+          </div>
 
-      </form>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full text-white py-3 rounded-lg font-semibold transition ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+
+          <p className="text-center mt-3">
+            If You Have Not Account ! Please{" "}
+            <Link
+              to="/signup"
+              className="text-blue-500 hover:underline"
+            >
+              Signup
+            </Link>
+
+            <Link
+              to="/forgot-password"
+              className="block text-center text-blue-500 hover:underline"
+            >
+              Forgot Password?
+            </Link>
+          </p>
+
+        </form>
+      </div>
     </div>
   );
 }
