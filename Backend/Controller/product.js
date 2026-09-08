@@ -24,6 +24,7 @@ export async function getProduct(req, res) {
     const { search = "", category = "", page = 1, limit = 8 } = req.query;
     let filter = {};
 
+    // search prodct by title and category ; i ,no diffrence  capital and small letters
     if (search) {
       filter.$or = [
         { title: { $regex: search, $options: "i" } },
@@ -31,11 +32,13 @@ export async function getProduct(req, res) {
         { category: { $regex: search, $options: "i" } }
       ];
     }
+    // if category select , show select category
     if (category) filter.category = category;
 
+    // paginationv calculation ?
     const pageNum = Number(page);
     const limitNum = Number(limit);
-    const skip = (pageNum - 1) * limitNum;
+    const skip = (pageNum - 1) * limitNum; // skip previos product !
 
     const totalProducts = await Product.countDocuments(filter);
     const products = await Product.find(filter)

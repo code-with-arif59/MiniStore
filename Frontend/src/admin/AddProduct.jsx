@@ -25,8 +25,6 @@ async function handleSubmit(e) {
 
   try {
     const response = await api.post("/api/product/add", form);
-
-    toast.success("Product Added Successfully!")
     navigate("/admin/product");
   } catch (error) {
     console.log(error.response?.data);

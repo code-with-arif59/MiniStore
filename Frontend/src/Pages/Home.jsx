@@ -20,17 +20,22 @@ export default function Home() {
         `/api/product?search=${search}&category=${category}&page=${page}&limit=20`
       );
 
-      const products = response.data.products || [];
+
+         console.log("respomnse data", response);
+         
+      const products = response.data.products || [];  
       setproduct(products);
       setTotalPages(response.data.totalPages || 1);
+        
 
-      if (products.length > 0) {
+          // get category in array ,and remove duplicate category by set
+       if (products.length > 0) {
         const uniqueCategories = [
           ...new Set(products.map((item) => item.category)),
         ];
-        setCategories((prev) =>
-          prev.length === 0 ? uniqueCategories : prev
-        );
+
+        // put previous category , and dropworn in all category 
+        setCategories((prev) =>prev.length === 0 ? uniqueCategories : prev);
       }
     } catch (error) {
       console.log("Error loading products", error);
@@ -41,24 +46,21 @@ export default function Home() {
     loadProduct();
   }, [search, category, page]);
 
+
+   // Add To Cart
   async function addToCart(productId) {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
 
     if (!userId) {
-      toast.error("Pehle Login First!");
+      toast.error(" Login First!");
       navigate("/login");
       return;
     }
 
     try {
-      await api.post(
-        "/api/cart/add",
-        { userId, productId, quantity: 1 },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await api.post("/api/cart/add",{ userId, productId, quantity: 1 }, { headers: { Authorization: `Bearer ${token}` } });
 
-      toast.success("product add 🛒");
       window.dispatchEvent(new Event("cartupdated"));
     } catch (error) {
       const errorMsg =
@@ -78,7 +80,11 @@ export default function Home() {
         </p>
       </div>
 
+
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
+
+        {/* Searchbar And All Categories */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-4 rounded-xl shadow-sm mb-8">
           <input
             placeholder="Search products..."
@@ -107,13 +113,12 @@ export default function Home() {
           </select>
         </div>
 
+
+        {/* All Cart */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {product.length > 0 ? (
             product.map((item) => {
-              const isOutOfStock =
-                item.stock !== undefined
-                  ? item.stock <= 0
-                  : item.countInStock <= 0;
+              const isOutOfStock =   item.stock !== undefined? item.stock <= 0 : item.countInStock <= 0;
 
               return (
                 <div
@@ -121,6 +126,7 @@ export default function Home() {
                   className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-xl transition-all p-4 flex flex-col justify-between"
                 >
                   <Link to={`/product/${item._id}`}>
+                  {/* image */}
                     <div className="w-full h-48 rounded-lg bg-gray-50 flex items-center justify-center p-2 mb-4">
                       <img
                         src={item.image}
@@ -128,10 +134,13 @@ export default function Home() {
                         className="h-full w-full object-contain"
                       />
                     </div>
+
+                    {/* title  */}
                     <h2 className="font-bold text-gray-800 text-base line-clamp-1 mb-1">
                       {item.title}
                     </h2>
 
+                        {/* stock */}
                     <div className="mb-2">
                       {isOutOfStock ? (
                         <span className="text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded">
@@ -163,7 +172,8 @@ export default function Home() {
                 </div>
               );
             })
-          ) : (
+          ) 
+          : (
             <div className="col-span-full text-center py-16">
               <p className="text-gray-500 text-lg">No products found!</p>
             </div>

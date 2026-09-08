@@ -21,11 +21,11 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    toast.success("Signup Successfully")
-
+    
     try {
       const response = await api.post("/api/auth/signup", form);
       setmsg(response.data.message);
+      toast.success("Signup Successfully")
       navigate("/login");
     } catch (error) {
       setmsg(error.response?.data?.message || "An Error Occured");
@@ -41,7 +41,7 @@ export default function Signup() {
           </h2>
 
           {msg && (
-            <div className="bg-red-100 text-red-700 p-3 rounded-lg mb-4 text-center">
+            <div className="bg-red-100 text-yellow-700 p-3 rounded-lg mb-4 text-center">
               {msg}
             </div>
           )}

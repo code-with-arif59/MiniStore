@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation  } from "react-router-dom";
 import api from "../../api/axios";
 
 export default function Navbar() {
@@ -49,7 +49,7 @@ export default function Navbar() {
   function logout() {
     localStorage.clear();
     setcartCount(0);
-    navigate("/login");
+    navigate("/login",{replace:true});
   }
 
   return (
@@ -57,8 +57,8 @@ export default function Navbar() {
 
       {/* Logo */}
       <Link
-        to={userId ? "/home" : "/login"}
-        className="font-extrabold text-2xl text-blue-600 tracking-tight flex items-center gap-1"
+        to={userId ? "/home" : "/login" } 
+        className="font-extrabold text-2xl text-blue-600 tracking-tight flex items-center gap-1" 
       >
         <span>MiniStore</span>
         <span className="text-blue-500 text-sm">.</span>
@@ -79,7 +79,7 @@ export default function Navbar() {
         {/* My Orders - Only Normal User */}
         {userId && !isAuthPage && role !== "admin" && (
           <Link
-            to="/my-orders"
+            to="/my-orders" 
             className="text-gray-700 hover:text-blue-600 font-semibold text-sm transition flex items-center gap-1"
           >
             📦 <span>My Orders</span>
@@ -89,7 +89,7 @@ export default function Navbar() {
         {/* Cart - Only Normal User */}
         {userId && !isAuthPage && role !== "admin" && (
           <Link
-            to="/cart"
+            to="/cart" 
             className="relative p-2 text-gray-700 hover:text-blue-600 transition flex items-center"
           >
             <span className="text-2xl">🛒</span>
@@ -103,10 +103,10 @@ export default function Navbar() {
         )}
 
         {/* Login / Signup / Logout */}
-        {!userId ? (
+        { !userId || isAuthPage ? (
           <div className="flex gap-2">
             <Link
-              to="/login"
+              to="/login" 
               className="text-gray-700 hover:text-blue-600 px-3 py-1.5 font-medium transition"
             >
               Login

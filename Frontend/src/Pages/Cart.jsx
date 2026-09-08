@@ -21,6 +21,9 @@ export default function Cart() {
   useEffect(() => {
     loadCart();
   }, []);
+
+
+  //! Remove Item From Cart
   async function removeItem(productId) {
     await api.post("/api/cart/remove", {
       userId,
@@ -71,9 +74,7 @@ export default function Cart() {
   );
 
   // Stock error check (handling optional stock field gracefully)
-  const hasStockError = validItems.some(
-    (item) => item.productId.stock !== undefined && (item.quantity > item.productId.stock || item.productId.stock <= 0)
-  );
+  const hasStockError = validItems.some( (item) => item.productId.stock !== undefined && (item.quantity > item.productId.stock || item.productId.stock <= 0));
 
   return (
     <div className="bg-gray-50 min-h-screen py-10 px-4">
@@ -91,7 +92,8 @@ export default function Cart() {
               Continue Shopping
             </button>
           </div>
-        ) : (
+        ) :
+         (
           <>
             <div className="divide-y divide-gray-100">
               {validItems.map((item) => {
@@ -165,6 +167,7 @@ export default function Cart() {
                         </button>
                       </div>
 
+                  {/* REMOVE ITTEM FROM CART */}
                       <button
                         onClick={() => removeItem(product._id)}
                         className="text-red-500 hover:text-red-700 font-semibold text-sm transition cursor-pointer"

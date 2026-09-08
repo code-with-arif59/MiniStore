@@ -19,19 +19,11 @@ export default function Checkout() {
     }
 
     // Fetch Cart
-    api
-      .get(`/api/cart/${userId}`)
-      .then((res) => {
-        setCart(res.data);
-      })
+    api.get(`/api/cart/${userId}`).then((res) => {setCart(res.data);})
       .catch((err) => console.log("Cart fetch error:", err));
 
     // Fetch Address
-    api
-      .get(`/api/address/${userId}`)
-      .then((res) => {
-        setAddress(res.data[0] || null);
-      })
+    api.get(`/api/address/${userId}`).then((res) => {setAddress(res.data[0] || null);})
       .catch((err) => console.log("Address fetch error:", err));
   }, [userId, navigate]);
 
@@ -40,8 +32,7 @@ export default function Checkout() {
     if (newQty < 1) return;
 
     try {
-      await api.post(
-        "/api/cart/add",
+      await api.post("/api/cart/add",
         { userId, productId, quantity: newQty - getQty(productId) },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -160,7 +151,7 @@ export default function Checkout() {
               )}
             </div>
 
-            {/* Order Items Preview with Quantity Controls */}
+            {/*  Items Preview with Quantity Controls */}
             <div className="bg-white p-6 rounded-2xl shadow-sm border">
               <h2 className="text-lg font-bold text-gray-800 mb-4">2. Items Preview</h2>
               <div className="divide-y divide-gray-100">

@@ -13,7 +13,7 @@ import Cart from "./Pages/Cart";
 import ChekoutAddress from "./Pages/ChekoutAddress";
 import Chekout from "./Pages/Chekout";
 import OderSuccess from "./Pages/OderSuccess";
-import MyOrders from "./Pages/MyOrders"; 
+import MyOrders from "./Pages/MyOrders";
 import ProtectedRoute from "./Pages/ProtectedRoute";
 import ForgotPassword from "./Pages/ForgotPassword";
 
@@ -31,17 +31,86 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/home",
-        element: <Home />,
-      },
-      {
         path: "/signup",
         element: <Signup />,
       },
       {
-        path: "/product/:id",
-        element: <Product />,
+        path: "/forgot-password",
+        element: <ForgotPassword />,
       },
+
+      {
+        path: "/home",
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "/product/:id",
+        element: (
+          <ProtectedRoute>
+            <Product />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "/cart",
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "/checkout",
+        element: (
+          <ProtectedRoute>
+            <Chekout />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "/chekout",
+        element: (
+          <ProtectedRoute>
+            <Chekout />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "/checkout-address",
+        element: (
+          <ProtectedRoute>
+            <ChekoutAddress />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "/order-success/:id",
+        element: (
+          <ProtectedRoute>
+            <OderSuccess />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "/my-orders",
+        element: (
+          <ProtectedRoute>
+            <MyOrders />
+          </ProtectedRoute>
+        ),
+      },
+
       {
         path: "/admin/product",
         element: (
@@ -50,6 +119,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "/admin/product/add",
         element: (
@@ -58,6 +128,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "/admin/products/update/:id",
         element: (
@@ -66,38 +137,6 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
-      {
-        path: "/chekout",
-        element: <Chekout />,
-      },
-      {
-        path: "/checkout", 
-        element: <Chekout />,
-      },
-      {
-        path: "/checkout-address",
-        element: <ChekoutAddress />,
-      },
-      {
-        path: "/order-success/:id",
-        element: <OderSuccess />,
-      },
-    
-      {
-        path: "/my-orders",
-        element: <MyOrders />,
-      },
-
-        {
-        path: "/forgot-password",
-        element: <ForgotPassword />,
-      },
-
-      
     ],
   },
 ]);
