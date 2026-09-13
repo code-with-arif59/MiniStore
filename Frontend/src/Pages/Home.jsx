@@ -8,11 +8,10 @@ export default function Home() {
   const [search, setsearch] = useState("");
   const [category, setcategory] = useState("");
   const [categories, setCategories] = useState([]);
-
-  const navigate = useNavigate();
-
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  const navigate = useNavigate();
 
   async function loadProduct() {
     try {
@@ -21,7 +20,7 @@ export default function Home() {
       );
 
 
-         console.log("respomnse data", response);
+        //  console.log("respomnse data", response);
          
       const products = response.data.products || [];  
       setproduct(products);
@@ -117,7 +116,7 @@ export default function Home() {
         {/* All Cart */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {product.length > 0 ? (
-            product.map((item) => {
+            product.map((item) =>   {
               const isOutOfStock =   item.stock !== undefined? item.stock <= 0 : item.countInStock <= 0;
 
               return (
@@ -148,7 +147,7 @@ export default function Home() {
                         </span>
                       ) : (
                         <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded">
-                          In Stock ({item.stock ?? item.countInStock}) ✅
+                          In Stock  ✅
                         </span>
                       )}
                     </div>
